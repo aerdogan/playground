@@ -1,0 +1,36 @@
+{% extends 'layout.html' %}
+{% load static %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-md-6 mx-auto">
+            <div class="card">
+                <div class="card-header bg-primary text-white">
+                    <h4>Kayıt Formu</h4>
+                </div>
+                <div class="card-body">
+                    <form action="{% url 'register' %}" method="POST">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <label for="username">Kullanıcı Adı</label>
+                            <input type="text" name="username" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">E-mail</label>
+                            <input type="email" name="email" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="password">Şifre</label>
+                            <input type="password" name="password" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="repassword">Şifre(Tekrar)</label>
+                            <input type="password" name="repassword" class="form-control" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-block">Kaydet</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

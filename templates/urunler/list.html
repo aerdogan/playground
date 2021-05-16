@@ -1,0 +1,42 @@
+{% extends 'layout.html' %}
+{% load static %}
+{% load humanize %}
+
+{% block content %}
+
+<div class="row">
+    <div class="col-md-12">
+        {% if urunler %}
+            {% for urun in urunler %}
+                <div class="card mb-3">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <img class="card-img" src="{% static urun.get_image_path %}" alt="">
+                        </div>
+                        <div class="col-md-9">
+                            <div class="card-body">
+                                <div class="card-title">
+                                    <a href="{% url 'detail' urun.id %}">{{ urun.name }}</a>
+                                </div>
+                                <p class="card-text">
+                                   {{ urun.description }}
+                                </p>
+                                <p class="card-text">
+                                    <small class="text-muted">{{ urun.created_date | timesince }}</small>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>                        
+            {% endfor %}
+        {% else %}
+        <div class="alert alert-warning">
+            <p>
+                Ürün Bulunamadı...
+            </p>
+        </div>
+        {% endif %}
+    </div>
+</div>
+
+{% endblock %}

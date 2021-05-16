@@ -1,0 +1,36 @@
+<header>
+    <div class="navbar navbar-expand-sm bg-primary navbar-dark">
+        <div class="container">
+            <a href="{% url 'index' %}" class="navbar-brand">MyApp</a>
+            <ul class="navbar-nav mr-auto">
+                <li {% if request.path == '/' %} class="nav-item active" {% else %} class="nav-item" {% endif %}>
+                    <a href="{% url 'index' %}" class="nav-link">Home</a>
+                </li>
+                <li {% if 'about' in request.path %} class="nav-item active" {% else %} class="nav-item" {% endif %}>
+                    <a href="{% url 'about' %}" class="nav-link">Hakkında</a>
+                </li>
+                <li {% if 'urunler' in request.path %} class="nav-item active" {% else %} class="nav-item" {% endif %}>
+                    <a href="{% url 'urunler' %}" class="nav-link">Ürünler</a>
+                </li>
+            </ul>
+            <ul class="navbar-nav">
+                {% if user.is_authenticated %}
+                <li class="nav-item">
+                    <a href="javascript:{document.getElementById('logout').submit()}" class="nav-link">({{ user.username }}) Çıkış</a>
+                    <form action="{% url 'logout' %}" method="POST" id="logout">
+                        {% csrf_token %}
+                        <input type="hidden">
+                    </form>
+                </li>   
+                {% else %}   
+                <li {% if 'login' in request.path %} class="nav-item active" {% else %} class="nav-item" {% endif %}>
+                    <a href="{% url 'login' %}" class="nav-link">Giriş</a>
+                </li>
+                <li {% if 'register' in request.path %} class="nav-item active" {% else %} class="nav-item" {% endif %}>
+                    <a href="{% url 'register' %}" class="nav-link">Kayıt</a>
+                </li> 
+                {% endif %}                           
+            </ul>
+        </div>
+    </div>
+</header>
